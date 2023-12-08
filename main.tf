@@ -130,24 +130,24 @@ resource "rhcs_cluster_rosa_classic" "rosa_kafka_cluster" {
   depends_on = [module.create_account_roles]
 }
 
-# resource "rhcs_machine_pool" "kafka_machine_pool" {
-# cluster             = rhcs_cluster_rosa_classic.rosa_kafka_cluster.id
-# name                = "kafka-machinepool"
-# machine_type        = "r6i.2xlarge"
-# disk_size           = 1000
-# autoscaling_enabled = true
-# min_replicas        = 3
-# max_replicas        = 12
-# labels              = { "MachinePool" = "kafka" }
-# taints = [{
-# key           = "dedicated",
-# value         = "kafka",
-# schedule_type = "NoSchedule"
-# }]
-# 
-# depends_on = [rhcs_cluster_rosa_classic.rosa_kafka_cluster]
-# }
-# 
+resource "rhcs_machine_pool" "kafka_machine_pool" {
+  cluster      = rhcs_cluster_rosa_classic.rosa_kafka_cluster.id
+  name         = "kafka"
+  machine_type = "r6i.2xlarge"
+  # disk_size           = 1000
+  autoscaling_enabled = true
+  min_replicas        = 3
+  max_replicas        = 12
+  labels              = { "MachinePool" = "kafka" }
+  taints = [{
+    key           = "dedicated",
+    value         = "kafka",
+    schedule_type = "NoSchedule"
+  }]
+
+  depends_on = [rhcs_cluster_rosa_classic.rosa_kafka_cluster]
+}
+
 
 #---------------------------------------------------------------
 # Cluster Admin credentials resources
