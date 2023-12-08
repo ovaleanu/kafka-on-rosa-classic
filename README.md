@@ -19,5 +19,6 @@ terraform init
 terraform apply --auto-approved
 ```
 
-ROSA cluster Admin user: admin
-Get admin user password: `aws secretsmanager get-secret-value --secret-id <output.rosa_admin_password_secret_name> --region $AWS_REGION --query "SecretString" --output text`
+ROSA cluster Admin user: cluster-admin
+
+Get cluster-admin user password: `aws secretsmanager get-secret-value --secret-id <output.rosa_admin_password_secret_name> --region $AWS_REGION --query "SecretString" --output text`
