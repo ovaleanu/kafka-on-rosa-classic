@@ -105,9 +105,9 @@ resource "rhcs_cluster_rosa_classic" "rosa_kafka_cluster" {
   availability_zones = local.azs
   multi_az           = var.multi_az
 
-  version      = local.version
-  machine_cidr = local.machine_cidr
-  # worker_disk_size         = 300
+  version                     = local.version
+  machine_cidr                = local.machine_cidr
+  worker_disk_size            = 300
   compute_machine_type        = "m5.xlarge"
   autoscaling_enabled         = true
   min_replicas                = 3
@@ -131,10 +131,10 @@ resource "rhcs_cluster_rosa_classic" "rosa_kafka_cluster" {
 }
 
 resource "rhcs_machine_pool" "kafka_machine_pool" {
-  cluster      = rhcs_cluster_rosa_classic.rosa_kafka_cluster.id
-  name         = "kafka"
-  machine_type = "r6i.2xlarge"
-  # disk_size           = 1000
+  cluster             = rhcs_cluster_rosa_classic.rosa_kafka_cluster.id
+  name                = "kafka"
+  machine_type        = "r6i.2xlarge"
+  disk_size           = 1000
   autoscaling_enabled = true
   min_replicas        = 3
   max_replicas        = 12
